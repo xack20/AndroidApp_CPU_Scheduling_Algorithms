@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OS</string>
+    <string name="welcome_to_operating_system_cpu_scheduling_algorithms">Welcome To Operating System CPU Scheduling Algorithms</string>
+    <string name="fcfs">FCFS</string>
+    <string name="sjf_non_preemptive">SJF (Non-preemptive)</string>
+    <string name="sjf_preemptive">sjf (preemptive)</string>
+    <string name="welcome_to_fcfs">Welcome To FCFS</string>
+</resources>

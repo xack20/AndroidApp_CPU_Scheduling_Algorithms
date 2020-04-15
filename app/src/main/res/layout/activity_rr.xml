@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".rr"
+    android:background="@drawable/bg"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/wel_rr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="75dp"
+        android:text="Welcome  To  Round Robin"
+        android:textColor="@color/White"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/rr_txt_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        >
+
+        <EditText
+            android:id="@+id/p_id_rr"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Process_id  (P0, P1)"
+            android:imeOptions="actionDone"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/rr_at"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White"
+            android:hint="Arrival Time"
+            android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/rr_bt"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Brust Time"
+            android:imeOptions="actionDone"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White"
+            android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/rr_tq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Time Quantum"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White" />
+
+
+
+        <LinearLayout
+            android:id="@+id/rr_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/rr_insert"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Insert"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="22dp"
+                tools:targetApi="lollipop" />
+
+            <Button
+                android:id="@+id/rr_calculate"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Calculate"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="22dp"
+                tools:targetApi="lollipop" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
