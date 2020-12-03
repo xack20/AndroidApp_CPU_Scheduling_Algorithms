@@ -1,16 +1,18 @@
 package com.example.al;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
-import static java.lang.Character.toLowerCase;
+
 import static java.lang.Character.toUpperCase;
 import static java.lang.Math.log10;
 
@@ -181,7 +183,7 @@ public class rr_out extends AppCompatActivity {
     }
 
 
-    private class rrr implements java.util.Comparator<proccess> {
+    private static class rrr implements java.util.Comparator<proccess> {
         @Override
         public int compare(proccess a, proccess b) {
             return (int) (a.at - b.at);

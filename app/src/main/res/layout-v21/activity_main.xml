@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="2dp"
-            android:text="Round robin"
+            android:text="@string/round_robin"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="2dp"
-            android:text="Priority(Non-Preemptive)"
+            android:text="@string/priority_non_preemptive"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="2dp"
-            android:text="Priority(Preemptive)"
+            android:text="@string/priority_preemptive"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
