@@ -5,4 +5,7 @@
     <string name="sjf_non_preemptive">SJF (Non-preemptive)</string>
     <string name="sjf_preemptive">sjf (preemptive)</string>
     <string name="welcome_to_fcfs">Welcome To FCFS</string>
+    <string name="round_robin">Round robin</string>
+    <string name="priority_non_preemptive">Priority(Non-Preemptive)</string>
+    <string name="priority_preemptive">Priority(Preemptive)</string>
 </resources>
