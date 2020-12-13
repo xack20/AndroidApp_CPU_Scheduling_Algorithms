@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.al">
 
     <application
@@ -11,20 +12,22 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:allowBackup="false"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".rr_final" />
-        <activity android:name=".prio2_out" />
-        <activity android:name=".prio2" />
-        <activity android:name=".prio_out" />
-        <activity android:name=".prio" />
-        <activity android:name=".rr_out" />
-        <activity android:name=".sjf2_out" />
-        <activity android:name=".sjf_out" />
-        <activity android:name=".fcfs_out" />
-        <activity android:name=".rr" />
-        <activity android:name=".sjf2_act" />
-        <activity android:name=".sjf_act" />
-        <activity android:name=".fcfs_act" />
+
+        <activity android:name=".fcfs" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".prio2" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".prio" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".rr" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".sjf2" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".sjf" android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity android:name=".input" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

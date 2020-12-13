@@ -3,7 +3,6 @@ package com.example.al;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -17,28 +16,24 @@ import static java.lang.Character.toLowerCase;
 import static java.lang.Math.log10;
 
 
-public class fcfs_out extends AppCompatActivity {
+public class fcfs extends AppCompatActivity {
 
-    ArrayList<proccess> List;
+    ArrayList< proccess > List;
+    ArrayList< Integer > intList;
 
-    @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fcfs_out);
-        TextView fcfs_list = findViewById(R.id.fcfs_list);
+        setContentView(R.layout.activity_output);
+        TextView fcfs_list = findViewById(R.id.list);
 
         List = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("list");
         assert List != null;
 
-        //List.sort(new arrival());
 
-        Collections.sort(List,new arrival());
-
-        //System.out.println(List.size());
-        //for(int i = 0 ; i < List.size() ; i ++)
-            //fcfs_list.setText(List.get(i).name+" "+List.get(i).at+" "+List.get(i).bt);
+        Collections.sort(List, new arrival() );
+        //Collections.sort(intList);
 
 
         int n = List.size();
@@ -49,8 +44,7 @@ public class fcfs_out extends AppCompatActivity {
 
         double rt = 0;
 
-        int ti=0;
-
+        int ti = 0;
 
 
         times[ti++] = rt;
@@ -65,19 +59,19 @@ public class fcfs_out extends AppCompatActivity {
                 rt = List.get(i).at; // 2
 
                 times[ti++] = rt;
-                pro_list.add(List.get(i).name);
-
-                rt+= List.get(i).bt;
-                times[ti++] = rt;
 
             }
-            else
-            {
-                pro_list.add(List.get(i).name);
-                rt+= List.get(i).bt;
-                times[ti++] = rt;
-            }
+            pro_list.add(List.get(i).name);
+            rt+= List.get(i).bt;
+            times[ti++] = rt;
         }
+
+
+
+
+
+
+
 
 
         StringBuilder ans= new StringBuilder();
@@ -104,6 +98,14 @@ public class fcfs_out extends AppCompatActivity {
         }
         ans.append("\n\n");
 
+
+
+
+
+
+
+
+
         ans.append("\n\n*****************     Waiting times    *****************\n\n");
 
         int wt = 0 ;
@@ -113,16 +115,15 @@ public class fcfs_out extends AppCompatActivity {
         for(int i = 0 ; i < pro_list.size() ; i ++)
         {
             if(toLowerCase( pro_list.get(i).charAt(0) )=='p'){
-                //printf("%s : %d\n", pro_list[i] ,(times[i]-name[ind++].arrival_time) );
+
                 ans.append(pro_list.get(i)).append(" : ").append(times[i] - List.get(ind++).at).append('\n');
                 wt+=(times[i]-List.get(ind-1).at);
             }
         }
-        //printf("\n");
+
         ans.append('\n');
 
 
-        //printf("Average Waiting time : %.2lf\n\n\n",( double(wt)/(double)n));
         ans.append("Average Waiting time : ").append( (double)(wt)/(double) (n) ).append("\n\n\n");
 
 
@@ -132,7 +133,7 @@ public class fcfs_out extends AppCompatActivity {
 
 
 
-        //printf("\n\n*****************     Turnaround times    *****************\n\n");
+
         ans.append("\n\n****************   Turnaround times  ****************\n\n");
 
         int tt = 0 ;
@@ -142,19 +143,15 @@ public class fcfs_out extends AppCompatActivity {
         for(int i = 0 ; i < pro_list.size() ; i ++)
         {
             if(toLowerCase( pro_list.get(i).charAt(0) )=='p'){
-                //printf("%s : %d\n", pro_list[i] ,(times[i+1]-name[ind++].arrival_time) );
                 ans.append(pro_list.get(i)).append(" : ").append(times[i+1] - List.get(ind++).at).append('\n');
                 tt+=(times[i+1]-List.get(ind-1).at);
             }
         }
-        //printf("\n");
+
         ans.append('\n');
 
 
-        //printf("Average TT : %.2lf\n",( (double)tt / (double) n ));
         ans.append("Average TT : ").append( (double)(tt)/(double) (n) ).append("\n\n\n");
-
-        //printf("\n\n");//
 
 
 
@@ -164,7 +161,7 @@ public class fcfs_out extends AppCompatActivity {
     }
 
 
-    private class arrival implements java.util.Comparator<proccess> {
+    private static class arrival implements java.util.Comparator<proccess> {
         @Override
         public int compare(proccess a, proccess b) {
             return (int)(a.at - b.at);

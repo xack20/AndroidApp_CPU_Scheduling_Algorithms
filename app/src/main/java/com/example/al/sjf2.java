@@ -3,31 +3,33 @@ package com.example.al;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 import android.widget.TextView;
 
+import static java.lang.Character.toUpperCase;
+import static java.lang.Math.log10;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Objects;
 
-import static java.lang.Character.toUpperCase;
-import static java.lang.Math.log10;
 
-public class prio2_out extends AppCompatActivity {
+
+public class sjf2 extends AppCompatActivity {
     ArrayList<proccess> List;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prio2_out);
-        TextView out_list = findViewById(R.id.prio2_list);
+        setContentView(R.layout.activity_output);
 
+        TextView out_list = findViewById(R.id.list);
+        StringBuilder ans = new StringBuilder();
         List = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("list");
         assert List != null;
 
@@ -50,15 +52,15 @@ public class prio2_out extends AppCompatActivity {
         times.add(0.0);
 
         double ct = 0.0;
-        //int f = 1;
+
 
         while (n != 0) {
             int ind = 0;
             int f = 0;
             double val = 1 << 29, tm = 0.0;
             for (int i = 0; i < sz; i++) {
-                if (List.get(i).at <= ct && List.get(i).pv < val && List.get(i).bt > 0.0) {
-                    val = List.get(i).pv;
+                if (List.get(i).at <= ct && List.get(i).bt < val && List.get(i).bt > 0.0) {
+                    val = List.get(i).bt;
                     ind = i;
                     f = 1;
                 } else if (List.get(i).at > ct) {
@@ -97,7 +99,7 @@ public class prio2_out extends AppCompatActivity {
         pro_list = NA;
         times = TA;
 
-        StringBuilder ans = new StringBuilder();
+
 
 
         ans.append("\n\n*****************     Gantt Chart    *****************\n\n");
@@ -106,7 +108,7 @@ public class prio2_out extends AppCompatActivity {
         ans.append("\n");
 
         for (String s : pro_list) {
-            if (toUpperCase(s.charAt(0)) == 'p') ans.append("|  ").append(s).append("  ");
+            if (toUpperCase(s.charAt(0)) == 'P') ans.append("|  ").append(s).append("  ");
             else ans.append("| ").append(s).append(" ");
         }
         ans.append("|\n");
@@ -120,6 +122,9 @@ public class prio2_out extends AppCompatActivity {
             else ans.append(time.intValue()).append("     ");
         }
         ans.append("\n\n");
+
+
+
 
 
         HashMap<String, Boolean> mp = new HashMap<>();
@@ -140,7 +145,7 @@ public class prio2_out extends AppCompatActivity {
             ans.append(stringDoublePair.first).append(" ->  ").append(stringDoublePair.second).append('\n');
             w_t += stringDoublePair.second;
         }
-        ans.append("\nAverage WT -> ").append((w_t / WT.size())).append("\n");
+        ans.append("\nAverage WT -> ").append( (w_t / WT.size())).append("\n");
 
         double t_t=0.0;
         ans.append("\n\n****************   Turnaround times  ****************\n\n");
@@ -148,14 +153,17 @@ public class prio2_out extends AppCompatActivity {
             ans.append(stringDoublePair.first).append(" ->  ").append(stringDoublePair.second).append('\n');
             t_t+=stringDoublePair.second;
         }
-        ans.append("\nAverage TT -> ").append( (t_t / TT.size())).append("\n");
+        ans.append("\nAverage TT -> ").append((t_t / TT.size())).append("\n");
+
 
         out_list.setText(ans);
+
+
     }
     private static class COMP implements Comparator<proccess> {
         @Override
         public int compare(proccess o1, proccess o2) {
-            if(o1.at == o2.at)return (o1.pv- o2.pv);
+            if(o1.at == o2.at)return (int) (o1.bt- o2.bt);
             else return (int) (o1.at- o2.at);
         }
     }

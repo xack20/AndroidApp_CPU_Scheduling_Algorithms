@@ -8,55 +8,25 @@ import android.os.Parcelable;
 class proccess implements Parcelable {
 
     String name;
-    double  at;
+    double at;
     double bt;
-    int pv =0 ;
-    double tq = 0;
+    double opt;
 
-    //empty object
-    proccess()
-    {
 
-    }
-
-    // priority
-    proccess(String N, double A, double B, int P)
+    proccess(String N, double A, double B, double O)
     {
         name = N;
         at = A;
         bt = B;
-        pv = P;
+        opt = O;
     }
-
-
-    // fcfs , sjf
-    proccess(String N,double A, double B)
-    {
-        name = N;
-        at = A;
-        bt = B;
-    }
-
-
-
-    // rr
-    proccess (String N,double A, double B ,double T)
-    {
-        name = N;
-        at = A;
-        bt = B;
-        tq = T;
-    }
-
-
 
 
     private proccess(Parcel in) {
         name = in.readString();
         at = in.readDouble();
         bt = in.readDouble();
-        pv = in.readInt();
-        tq = in.readDouble();
+        opt = in.readDouble();
     }
 
     public static final Creator<proccess> CREATOR = new Creator<proccess>() {
@@ -81,17 +51,7 @@ class proccess implements Parcelable {
         parcel.writeString(name);
         parcel.writeDouble(at);
         parcel.writeDouble(bt);
-        parcel.writeInt(pv);
-        parcel.writeDouble(tq);
-    }
-
-    void set(proccess p)
-    {
-        name= p.name;
-        at = p.at;
-        bt = p.bt;
-        pv = p.pv;
-        tq = p.tq;
+        parcel.writeDouble(opt);
     }
 
 }

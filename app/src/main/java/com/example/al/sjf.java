@@ -15,16 +15,16 @@ import java.util.Objects;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Math.log10;
 
-public class sjf_out extends AppCompatActivity {
+public class sjf extends AppCompatActivity {
     ArrayList<proccess> List;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sjf_out);
+        setContentView(R.layout.activity_output);
 
-        TextView out_list = findViewById(R.id.sjf_list);
+        TextView out_list = findViewById(R.id.list);
 
 
         List = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("list");

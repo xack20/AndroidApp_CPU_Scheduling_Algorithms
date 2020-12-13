@@ -1,71 +1,162 @@
 package com.example.al;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.util.Pair;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Objects;
+
+import static java.lang.Character.toUpperCase;
+import static java.lang.Math.log10;
 
 public class prio2 extends AppCompatActivity {
-    ArrayList<proccess> list = new ArrayList<>();
-    EditText prio2_pid,prio2_at,prio2_bt,prio2;
+    ArrayList<proccess> List;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prio2);
+        setContentView(R.layout.activity_output);
+        TextView out_list = findViewById(R.id.list);
 
-        Button prio2_calculate = findViewById(R.id.prio2_calculate);
-        Button prio2_insert = findViewById(R.id.prio2_insert);
+        List = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("list");
+        assert List != null;
 
-        prio2_pid = findViewById(R.id.p_id_prio2);
-        prio2_at = findViewById(R.id.prio2_at);
-        prio2_bt = findViewById(R.id.prio2_bt);
-        prio2 = findViewById(R.id.prio2_num);
 
-        Handler handler = new Handler();
+        int sz = List.size();
+        int n = sz;
 
-        prio2_calculate.setOnClickListener(handler);
-        prio2_insert.setOnClickListener(handler);
-    }
+        Collections.sort(List, new COMP());
 
-    class Handler implements View.OnClickListener {
+        HashMap<String, Pair<Double, Double>> MP = new HashMap<>();
+        for (proccess P : List) {
+            Pair<Double, Double> val = new Pair<>(P.at, P.bt);
+            MP.put(P.name, val);
+        }
 
-        @Override
-        public void onClick(View v) {
-            if (v.getId()==R.id.prio2_calculate) {
-                openprio2_out();
+        ArrayList<String> pro_list = new ArrayList<>();
+        ArrayList<Double> times = new ArrayList<>();
+
+
+        times.add(0.0);
+
+        double ct = 0.0;
+        //int f = 1;
+
+        while (n != 0) {
+            int ind = 0;
+            int f = 0;
+            double val = 1 << 29, tm = 0.0;
+            for (int i = 0; i < sz; i++) {
+                if (List.get(i).at <= ct && List.get(i).opt < val && List.get(i).bt > 0.0) {
+                    val = List.get(i).opt;
+                    ind = i;
+                    f = 1;
+                } else if (List.get(i).at > ct) {
+                    tm = List.get(i).at;
+                    break;
+                }
             }
-            else if(v.getId()==R.id.prio2_insert){
 
-                proccess p = new proccess(String.valueOf(prio2_pid.getText()),Double.parseDouble(String.valueOf(prio2_at.getText())),Double.parseDouble(String.valueOf(prio2_bt.getText())),Integer.parseInt(String.valueOf(prio2.getText())));
-                //System.out.println(p.name+" "+p.at+" "+p.bt+" "+p.pv);
-                list.add(p);
-                Toast.makeText(prio2.this,"Inserted" , Toast.LENGTH_SHORT).show();
-
-                prio2_pid.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio2_at.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio2_bt.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio2.onEditorAction(EditorInfo.IME_ACTION_DONE);
-
-
-                prio2_pid.setText("");
-                prio2_at.setText("");
-                prio2_bt.setText("");
-                prio2.setText("");
-
+            if (f == 0) {
+                ct = tm;
+                pro_list.add("Idle");
+                times.add(ct);
+            } else {
+                ct += 1;
+                List.get(ind).bt -= 1.0;
+                pro_list.add(List.get(ind).name);
+                times.add(ct);
+                if (List.get(ind).bt == 0) n--;
             }
         }
+
+        ArrayList<String> NA = new ArrayList<>();
+        ArrayList<Double> TA = new ArrayList<>();
+
+        TA.add(0.0);
+        NA.add(pro_list.get(0));
+
+        for (int i = 0; i < pro_list.size() - 1; i++) {
+            if (!pro_list.get(i).equals(pro_list.get(i + 1))) {
+                NA.add(pro_list.get(i + 1));
+                TA.add(times.get(i + 1));
+            }
+        }
+        TA.add(times.get(times.size() - 1));
+
+        pro_list = NA;
+        times = TA;
+
+        StringBuilder ans = new StringBuilder();
+
+
+        ans.append("\n\n*****************     Gantt Chart    *****************\n\n");
+
+        for (int i = 0; i < pro_list.size(); i++) ans.append("---------");
+        ans.append("\n");
+
+        for (String s : pro_list) {
+            if (toUpperCase(s.charAt(0)) == 'p') ans.append("|  ").append(s).append("  ");
+            else ans.append("| ").append(s).append(" ");
+        }
+        ans.append("|\n");
+
+        for (int i = 0; i < pro_list.size(); i++) ans.append("---------");
+        ans.append("\n");
+
+
+        for (Double time : times) {
+            if ((int) (log10(time.intValue() + 1)) == 1 || time == 0) ans.append(time.intValue()).append("      ");
+            else ans.append(time.intValue()).append("     ");
+        }
+        ans.append("\n\n");
+
+
+        HashMap<String, Boolean> mp = new HashMap<>();
+
+        ArrayList<Pair<String, Double>> WT = new ArrayList<>(), TT = new ArrayList<>();
+
+        for (int i = pro_list.size() - 1; i >= 0; i--) {
+            if (!mp.containsKey(pro_list.get(i)) && !pro_list.get(i).equals("Idle")) {
+                mp.put(pro_list.get(i), true);
+                WT.add(new Pair<>(pro_list.get(i), times.get(i + 1) - (Objects.requireNonNull(MP.get(pro_list.get(i))).first + Objects.requireNonNull(MP.get(pro_list.get(i))).second)));
+                TT.add(new Pair<>(pro_list.get(i), times.get(i + 1) - Objects.requireNonNull(MP.get(pro_list.get(i))).first));
+            }
+        }
+
+        ans.append("\n\n*****************     Waiting times    *****************\n\n");
+        double w_t = 0.0;
+        for (Pair<String, Double> stringDoublePair : WT){
+            ans.append(stringDoublePair.first).append(" ->  ").append(stringDoublePair.second).append('\n');
+            w_t += stringDoublePair.second;
+        }
+        ans.append("\nAverage WT -> ").append((w_t / WT.size())).append("\n");
+
+        double t_t=0.0;
+        ans.append("\n\n****************   Turnaround times  ****************\n\n");
+        for (Pair<String, Double> stringDoublePair : TT) {
+            ans.append(stringDoublePair.first).append(" ->  ").append(stringDoublePair.second).append('\n');
+            t_t+=stringDoublePair.second;
+        }
+        ans.append("\nAverage TT -> ").append( (t_t / TT.size())).append("\n");
+
+        out_list.setText(ans);
     }
-    public void openprio2_out() {
-        Intent intent = new Intent(this, prio2_out.class);
-        intent.putExtra("list",list);
-        startActivity(intent);
+    private static class COMP implements Comparator<proccess> {
+        @Override
+        public int compare(proccess o1, proccess o2) {
+            if(o1.at == o2.at)return (int) (o1.opt- o2.opt);
+            else return (int) (o1.at- o2.at);
+        }
     }
 }

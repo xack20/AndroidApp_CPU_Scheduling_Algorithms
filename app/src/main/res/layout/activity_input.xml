@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".input"
+    android:background="@drawable/bg"
+    android:padding="10dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/algo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="50dp"
+        android:text="@string/algo_name"
+        android:textColor="@color/Azure"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/rr_txt_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <EditText
+            android:id="@+id/p_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/process_id_p0_p1"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="10sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#33FFFFFF" />
+
+        <EditText
+            android:id="@+id/att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/arrival_time"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:padding="10sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#33FFFFFF" />
+
+        <EditText
+            android:id="@+id/btt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/brust_time"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:padding="10sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#33FFFFFF" />
+
+
+        <EditText
+            android:id="@+id/opt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/opt"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:padding="10sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#33FFFFFF" />
+
+        <LinearLayout
+            android:id="@+id/rr_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/insert"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/btn_alter"
+                android:onClick="insertion"
+                android:padding="10sp"
+                android:text="@string/insert"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="20sp"
+                tools:targetApi="lollipop"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/calculate"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/btn_alter"
+                android:onClick="calc"
+                android:padding="10sp"
+                android:text="@string/calculate"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="20sp"
+                tools:targetApi="lollipop"
+                tools:ignore="OnClick" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

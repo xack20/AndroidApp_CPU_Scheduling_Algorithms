@@ -1,71 +1,165 @@
 package com.example.al;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
+
+import static java.lang.Character.toLowerCase;
+import static java.lang.Math.log10;
+
 
 public class prio extends AppCompatActivity {
 
-    ArrayList<proccess> list = new ArrayList<>();
+    ArrayList<proccess> List;
 
-    EditText prio_pid,prio_at,prio_bt,prio;
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prio);
-        Button prio_calculate = findViewById(R.id.prio_calculate);
-        Button prio_insert = findViewById(R.id.prio_insert);
+        setContentView(R.layout.activity_output);
 
-        prio_pid = findViewById(R.id.p_id_prio);
-        prio_at = findViewById(R.id.prio_at);
-        prio_bt = findViewById(R.id.prio_bt);
-        prio = findViewById(R.id.prio_num);
+        TextView out_list = findViewById(R.id.list);
 
-        Handler handler = new Handler();
+        List = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("list");
+        assert List != null;
 
-        prio_calculate.setOnClickListener(handler);
-        prio_insert.setOnClickListener(handler);
-    }
+        int sz = List.size();
+        Collections.sort(List, new priority());
 
-    class Handler implements View.OnClickListener {
+        ArrayList<String> pro_list = new ArrayList<>();
+        ArrayList<Double> times = new ArrayList<>();
 
-        @Override
-        public void onClick(View v) {
-            if (v.getId()==R.id.prio_calculate) {
-                openprio_out();
+        times.add(0.0);
+
+        double ct = 0.0;
+
+        int n = sz;
+
+        while(n != 0)
+        {
+            int ind = 0;
+            int f= 0;
+            double val  = 1<<29 ,tm = 0.0;
+            for(int i = 0 ; i < sz ; i ++ )
+            {
+                if(List.get(i).at <= ct && List.get(i).opt < val && List.get(i).bt >= 0.0 )
+                {
+                    val = List.get(i).opt;
+                    ind = i;
+                    f=1;
+                }
+                else if (List.get(i).at > ct) {
+                    tm = List.get(i).at;
+                    break;
+                }
             }
-            else {
 
-                proccess p = new proccess(String.valueOf(prio_pid.getText()),Double.parseDouble(String.valueOf(prio_at.getText())),Double.parseDouble(String.valueOf(prio_bt.getText())),Integer.parseInt(String.valueOf(prio.getText())));
-                //System.out.println(p.name+" "+p.at+" "+p.bt+" "+p.pv);
-                list.add(p);
-                Toast.makeText(prio.this,"Inserted" , Toast.LENGTH_SHORT).show();
-
-                prio_pid.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio_at.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio_bt.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                prio.onEditorAction(EditorInfo.IME_ACTION_DONE);
-
-                prio_pid.setText("");
-                prio_at.setText("");
-                prio_bt.setText("");
-                prio.setText("");
-
+            if(f==0)
+            {
+                ct=tm;
+                pro_list.add("Idle");
+                times.add(ct);
+            }
+            else{
+                ct+=List.get(ind).bt;
+                List.get(ind).bt = -1.0;
+                pro_list.add(List.get(ind).name);
+                times.add(ct);
+                n--;
             }
         }
+
+        StringBuilder ans = new StringBuilder();
+
+
+        ans.append("\n\n*****************     Gantt Chart    *****************\n\n");
+
+        for(int i = 0 ; i < pro_list.size() ; i ++) ans.append("---------");
+        ans.append("\n");
+
+        for(int i = 0 ; i < pro_list.size() ; i ++){
+            if(toLowerCase( pro_list.get(i).charAt(0) )=='p') ans.append("|  ").append(pro_list.get(i)).append("  ");
+            else ans.append("| ").append(pro_list.get(i)).append(" ");
+        }
+        ans.append("|\n");
+
+        for(int i = 0 ; i < pro_list.size() ; i ++) ans.append("---------");
+        ans.append("\n");
+
+
+
+        for(int i = 0 ; i < times.size() ; i ++){
+            if((int)(log10( times.get(i).intValue() +1) ) == 1 || times.get(i) == 0 ) ans.append( times.get(i).intValue() ).append("      ");
+            else ans.append( times.get(i).intValue() ).append("     ");
+        }
+        ans.append("\n\n");
+
+
+
+        ans.append("\n\n*****************     Waiting times    *****************\n\n");
+
+        int wt = 0 ;
+
+        int ind = 0;
+
+        for(int i = 0 ; i < pro_list.size() ; i ++)
+        {
+            if(toLowerCase( pro_list.get(i).charAt(0) )=='p'){
+                ans.append(pro_list.get(i)).append(" : ").append( times.get(i) - List.get(ind++).at ).append('\n');
+                wt+=(times.get(i)-List.get(ind-1).at);
+            }
+        }
+
+        ans.append('\n');
+
+
+        ans.append("Average Waiting time : ").append( (double)(wt)/(double) (sz) ).append("\n\n\n");
+
+
+
+
+
+
+
+
+        ans.append("\n\n****************   Turnaround times  ****************\n\n");
+
+        int tt = 0 ;
+
+        ind = 0;
+
+        for(int i = 0 ; i < pro_list.size() ; i ++)
+        {
+            if(toLowerCase( pro_list.get(i).charAt(0) )=='p'){
+                ans.append(pro_list.get(i)).append(" : ").append(times.get(i+1) - List.get(ind++).at).append('\n');
+                tt+=(times.get(i+1)-List.get(ind-1).at);
+            }
+        }
+
+        ans.append('\n');
+
+
+
+        ans.append("Average TT : ").append( (double)(tt)/(double) (sz) ).append("\n\n\n");
+
+
+        out_list.setText(ans);
+
     }
-    public void openprio_out() {
-        Intent intent = new Intent(this, prio_out.class);
-        intent.putExtra("list",list);
-        startActivity(intent);
+
+    private static class priority implements java.util.Comparator<proccess> {
+        @Override
+        public int compare(proccess a, proccess b) {
+            if(a.at == b.at)return (int) (a.opt - b.opt);
+            else return (int)(a.at-b.at) ;
+        }
     }
 }

@@ -7,62 +7,115 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_margin="25dp"
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"
+        android:layout_gravity="center"
         android:text="@string/welcome_to_operating_system_cpu_scheduling_algorithms"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@color/MistyRose"
         android:textColorLink="@android:color/white"
-        android:textSize="24sp"
-        android:gravity="center_horizontal" />
+        android:textSize="25sp" />
 
     <LinearLayout
         android:id="@+id/butt_lay"
         android:layout_width="match_parent"
-        android:layout_height="243dp"
-        android:layout_margin="30dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/FCFS"
-            style="@android:style/Widget.Material.Light.Button.Borderless"
-            android:layout_width="wrap_content"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
-            android:focusableInTouchMode="true"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
             android:text="@string/fcfs"
-            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
             tools:targetApi="lollipop" />
 
         <Button
-            android:textSize="20sp"
             android:id="@+id/sjf"
-            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
             android:text="@string/sjf_non_preemptive"
-            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
             tools:targetApi="lollipop" />
 
         <Button
-            android:textSize="20sp"
             android:id="@+id/sjf2"
-            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
             android:text="@string/sjf_preemptive"
-            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
             tools:targetApi="lollipop" />
 
+        <Button
+            android:id="@+id/rr"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:text="@string/round_robin"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/prio"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:text="@string/priority_non_preemptive"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/prio2"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_alter"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:text="@string/priority_preemptive"
+            android:textAllCaps="false"
+            android:textColor="@color/BlanchedAlmond"
+            android:textSize="15sp"
+            tools:targetApi="lollipop" />
 
     </LinearLayout>
 

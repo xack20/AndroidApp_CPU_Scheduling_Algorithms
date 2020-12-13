@@ -8,4 +8,11 @@
     <string name="round_robin">Round Robin</string>
     <string name="priority_non_preemptive">Priority(Non-Preemptive)</string>
     <string name="priority_preemptive">Priority(Preemptive)</string>
+    <string name="algo_name">Algo Title</string>
+    <string name="process_id_p0_p1">Process Name</string>
+    <string name="arrival_time">Arrival Time</string>
+    <string name="brust_time">Brust Time</string>
+    <string name="opt">Priority value / Time Quantum</string>
+    <string name="insert">Insert</string>
+    <string name="calculate">Calculate</string>
 </resources>
