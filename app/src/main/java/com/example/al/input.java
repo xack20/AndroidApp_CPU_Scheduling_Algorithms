@@ -15,10 +15,10 @@ import java.util.HashMap;
 
 public class input extends AppCompatActivity {
     ArrayList<proccess> list = new ArrayList<>();
-    int id;
+    String id;
     EditText at,bt,opt,pid;
 
-    HashMap<Integer,String> options = new HashMap<>();
+    HashMap<String,String> options = new HashMap<>();
 
 
     @SuppressLint("WrongConstant")
@@ -32,23 +32,23 @@ public class input extends AppCompatActivity {
         opt=findViewById(R.id.opt);
         pid=findViewById(R.id.p_id);
 
-        options.put(24,"First Come First Serve");
-        options.put(252,"SJF Non-Preemptive");
-        options.put(480,"SJF Preemptive");
-        options.put(708,"Round Robin");
-        options.put(936,"Priority Non-Preemptive");
-        options.put(1164,"Priority Preemptive");
+        options.put("2131230722","First Come First Serve");
+        options.put("2131230932","SJF Non-Preemptive");
+        options.put("2131230933","SJF Preemptive");
+        options.put("2131230908","Round Robin");
+        options.put("2131230897","Priority Non-Preemptive");
+        options.put("2131230898","Priority Preemptive");
 
 
 
-        id = getIntent().getIntExtra("options",0);
+        id = getIntent().getStringExtra("options");
         ((TextView)(findViewById(R.id.algo_name))).setText(options.get(id));
 
-        if(id == 24 || id == 252 || id == 480) {
+        if(id.equals("2131230722") || id.equals("2131230932") || id.equals("2131230933")) {
             ((EditText)findViewById(R.id.opt)).setText("0");
             findViewById(R.id.opt).setVisibility(View.GONE);
         }
-        else if(id == 708) {
+        else if(id.equals("2131230908")) {
             ((EditText) findViewById(R.id.opt)).setHint("Time Quantum");
             findViewById(R.id.opt).setVisibility(View.FOCUS_UP);
         }
@@ -74,18 +74,18 @@ public class input extends AppCompatActivity {
         pid.setText("");
         at.setText("");
         bt.setText("");
-        if(id==936 || id==1164)opt.setText("");
+        if(id.equals("2131230897") || id.equals("2131230898"))opt.setText("");
     }
 
     public void calc(View view) {
         if(list.size()>=1){
             Intent intent = new Intent();
-            if(id == 24)intent= new Intent(this,fcfs.class);
-            if(id == 252)intent= new Intent(this,sjf.class);
-            if(id == 480)intent= new Intent(this,sjf2.class);
-            if(id == 708)intent= new Intent(this,rr.class);
-            if(id == 936)intent= new Intent(this,prio.class);
-            if(id == 1164)intent= new Intent(this,prio2.class);
+            if(id.equals("2131230722"))intent= new Intent(this,fcfs.class);
+            if(id.equals("2131230932"))intent= new Intent(this,sjf.class);
+            if(id.equals("2131230933"))intent= new Intent(this,sjf2.class);
+            if(id.equals("2131230908"))intent= new Intent(this,rr.class);
+            if(id.equals("2131230897"))intent= new Intent(this,prio.class);
+            if(id.equals("2131230898"))intent= new Intent(this,prio2.class);
             intent.putParcelableArrayListExtra("list",list);
             startActivity(intent);
         }

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         Intent intent = new Intent(this,input.class);
-        intent.putExtra("options",view.getTop());
+        intent.putExtra("options",String.valueOf(view.getId()));
         startActivity(intent);
     }
 
