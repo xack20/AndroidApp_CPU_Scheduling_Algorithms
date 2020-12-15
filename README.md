@@ -1,7 +1,7 @@
 # OperatingSystemAlgorithms
 Operating System Course project
 
-# Exam Question Demo |                                         Written Answer Demo
+# Exam Question Demo &  Written Answer Demo
 ![pic](ex_qs.png)    | ![pic](ex_ans.png)
 
 # Application Demo
