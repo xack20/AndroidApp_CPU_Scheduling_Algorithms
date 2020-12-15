@@ -1,7 +1,6 @@
-# OperatingSystemAlgorithms
-Operating System Course project
+# Download Link
 
-![App Download Link](https://raw.githubusercontent.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/master/app/release/app-release.apk)
+![Click and Download](https://raw.githubusercontent.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/master/app/release/app-release.apk)
 
 # Exam Question Demo &  Written Answer Demo
 <img src="https://github.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/blob//master/images/ex_qs.png" width="50%" height="50%"> | 
