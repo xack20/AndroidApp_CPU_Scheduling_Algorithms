@@ -57,8 +57,6 @@ public class input extends AppCompatActivity {
             findViewById(R.id.opt).setVisibility(View.FOCUS_UP);
         }
 
-        //Toast.makeText(input.this,String.valueOf(id) , Toast.LENGTH_SHORT).show();
-
     }
 
     public void insertion(View view) {
