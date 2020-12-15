@@ -8,8 +8,8 @@ Operating System Course project
 ![pic](ex_ans.png)
 
 # Application Demo
-![pic](img1.png)
-![pic](img2.png)
-![pic](img3.png)
-![pic](img4.png)
-![pic](img5.png)
+![pic](img1.jpg)
+![pic](img2.jpg)
+![pic](img3.jpg)
+![pic](img4.jpg)
+![pic](img5.jpg)
