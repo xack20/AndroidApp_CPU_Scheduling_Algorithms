@@ -8,8 +8,5 @@ Operating System Course project
 ![pic](ex_ans.png)
 
 # Application Demo
-![pic](img1.jpg){:height="50%" width="50%"}
-![pic](img2.jpg){:height="50%" width="50%"}
-![pic](img3.jpg){:height="50%" width="50%"}
-![pic](img4.jpg){:height="50%" width="50%"}
-![pic](img5.jpg){:height="50%" width="50%"}
+<img src="https://github.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/blob/master/img1.jpg" width="50%" height="50%">
+
