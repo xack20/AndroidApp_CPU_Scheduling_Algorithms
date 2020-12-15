@@ -2,7 +2,8 @@
 Operating System Course project
 
 # Exam Question Demo &  Written Answer Demo
-![pic](ex_qs.png)    | ![pic](ex_ans.png)
+<img src="https://github.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/blob/master/ex_qs.png" width="80" height="80"> | 
+<img src="https://github.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/blob/master/ex_ans.png" width="75%" height="75%">
 
 # Application Demo
 <img src="https://github.com/xack20/AndroidApp_CPU_Scheduling_Algorithms/blob/master/img1.jpg" width="30%" height="30%"> | 
